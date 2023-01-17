@@ -20,7 +20,8 @@ namespace AzureRedisCacheApi.Persistence.Seed
 					Edition = "1st",
 					ISBN10 = "9780132350884",
 					ISBN13 = "978-0132350884",
-					Published = DateTime.Parse("Aug 1, 2008")
+					Published = DateTime.Parse("Aug 1, 2008"),
+					Rating = 4.4
 				});
 				
 				x.HasData(new Book
@@ -34,7 +35,8 @@ namespace AzureRedisCacheApi.Persistence.Seed
 					Edition = "1st",
 					ISBN10 = "0201633612",
 					ISBN13 = "978-0201633610",
-					Published = DateTime.Parse("Oct 31, 1994")
+					Published = DateTime.Parse("Oct 31, 1994"),
+					Rating = 4.2
 				});
 				
 				x.HasData(new Book
@@ -48,7 +50,8 @@ namespace AzureRedisCacheApi.Persistence.Seed
 					Edition = "1st",
 					ISBN10 = "9780596007126",
 					ISBN13 = "978-0596007126",
-					Published = DateTime.Parse("Oct 1, 2004")
+					Published = DateTime.Parse("Oct 1, 2004"),
+					Rating = 4.7
 				});
 				
 				x.HasData(new Book
@@ -62,7 +65,8 @@ namespace AzureRedisCacheApi.Persistence.Seed
 					Edition = "1st",
 					ISBN10 = "9780201616224",
 					ISBN13 = "978-0201616224",
-					Published = DateTime.Parse("Oct 30, 1999")
+					Published = DateTime.Parse("Oct 30, 1999"),
+					Rating = 4.8
 				});
 			});
 		}
