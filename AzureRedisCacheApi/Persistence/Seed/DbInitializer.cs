@@ -15,7 +15,7 @@ namespace AzureRedisCacheApi.Persistence.Seed
 					Title = "Clean Code: A Handbook of Agile Software Craftsmanship",
 					Description = "Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn’t have to be that way.",
 					Author = "Robert C. Martin (Author)",
-					Publisher = "",
+					Publisher = "Pearson",
 					Language = "English",
 					Edition = "1st",
 					ISBN10 = "9780132350884",

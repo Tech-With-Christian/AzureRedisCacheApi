@@ -17,8 +17,6 @@ namespace AzureRedisCacheApi.Persistence
 		{
 			// Seed database with new data if its not already present
 			modelBuilder.Seed();
-
-			base.OnModelCreating(modelBuilder);
 		}
 	}
 }
