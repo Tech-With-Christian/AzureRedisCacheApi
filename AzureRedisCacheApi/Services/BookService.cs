@@ -16,6 +16,11 @@ namespace AzureRedisCacheApi.Services
 			_bookRepo = bookRepo;
 		}
 
+		/// <summary>
+		/// Add a new book to the database and clear the Redis cache at Azure.
+		/// </summary>
+		/// <param name="book">Book Entity</param>
+		/// <returns>Book from database</returns>
 		public async Task<Book> AddBookAsync(Book book)
 		{
 			await _bookRepo.AddBookAsync(book);
@@ -23,6 +28,11 @@ namespace AzureRedisCacheApi.Services
 			return book;
 		}
 
+		/// <summary>
+		/// Delete a book in the database and clear the cache for any books
+		/// </summary>
+		/// <param name="bookId">Book ID</param>
+		/// <returns>True if book got deleted</returns>
 		public async Task<bool> DeleteBookAsync(int bookId)
 		{
 			bool result = await _bookRepo.DeleteBookAsync(bookId);
@@ -31,6 +41,12 @@ namespace AzureRedisCacheApi.Services
 			return result;
 		}
 
+		/// <summary>
+		/// Get a book from the cache or database. If the cache doesn't contain a book
+		/// matching the id provided, a request will be made to the database.
+		/// </summary>
+		/// <param name="bookId">Book ID</param>
+		/// <returns>Book Entity and true if data was loaded from Azure Redis cache</returns>
 		public async Task<(Book, bool)> GetBookAsync(int bookId)
 		{
 			var cacheData = await _redis.GetCacheDataAsync<IReadOnlyList<Book>>(_cacheKey);
@@ -61,6 +77,10 @@ namespace AzureRedisCacheApi.Services
 			return (book, false);
 		}
 
+		/// <summary>
+		/// Get all boks stored in either the cache or local application database.
+		/// </summary>
+		/// <returns>Read Only List of Book Entity and true if data was loaded from cache</returns>
 		public async Task<(IReadOnlyList<Book>, bool)> GetBooksAsync()
 		{
 			var cacheData = await _redis.GetCacheDataAsync<IReadOnlyList<Book>>(_cacheKey);
@@ -80,6 +100,11 @@ namespace AzureRedisCacheApi.Services
 			return (booksFromDb, false);
 		}
 
+		/// <summary>
+		/// Update a book in the database and clear the book cache.
+		/// </summary>
+		/// <param name="book">Book Entity</param>
+		/// <returns>Book Entity from database</returns>
 		public async Task<Book> UpdateBookAsync(Book book)
 		{
 			await _bookRepo.UpdateBookAsync(book);
