@@ -1,11 +1,11 @@
 ﻿using AzureRedisCacheApi.Entities;
 
-namespace AzureRedisCacheApi.Services.Repositories
+namespace AzureRedisCacheApi.Services
 {
-	public interface IBookRepository
+	public interface IBookService
 	{
-		Task<IReadOnlyList<Book>> GetBooksAsync();
-		Task<Book> GetBookAsync(int bookId);
+		Task<(IReadOnlyList<Book>, bool)> GetBooksAsync();
+		Task<(Book, bool)> GetBookAsync(int bookId);
 		Task<Book> AddBookAsync(Book book);
 		Task<Book> UpdateBookAsync(Book book);
 		Task<bool> DeleteBookAsync(int bookId);

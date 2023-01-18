@@ -1,4 +1,5 @@
-﻿using AzureRedisCacheApi.Persistence;
+﻿using AzureRedisCacheApi.Helpers;
+using AzureRedisCacheApi.Persistence;
 using AzureRedisCacheApi.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,8 @@ namespace AzureRedisCacheApi.Services
 			services.AddDatabase(configuration);
 			services.AddCaching(configuration);
 			services.AddTransient<IBookRepository, BookRepository>();
+			services.AddTransient<IRedisCacheHelper, RedisCacheHelper>();
+			services.AddTransient<IBookService, BookService>();
 			services.AddControllers();
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen();
