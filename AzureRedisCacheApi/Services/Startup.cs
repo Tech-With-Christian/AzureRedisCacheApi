@@ -1,4 +1,5 @@
 ﻿using AzureRedisCacheApi.Persistence;
+using AzureRedisCacheApi.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace AzureRedisCacheApi.Services
@@ -8,6 +9,8 @@ namespace AzureRedisCacheApi.Services
 		public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddDatabase(configuration);
+			services.AddCaching(configuration);
+			services.AddTransient<IBookRepository, BookRepository>();
 			services.AddControllers();
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen();
@@ -19,6 +22,16 @@ namespace AzureRedisCacheApi.Services
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(configuration.GetConnectionString("Default")));
 
+			return services;
+		}
+
+		public static IServiceCollection AddCaching(this IServiceCollection services, IConfiguration configuration)
+		{
+			services.AddStackExchangeRedisCache(options =>
+			{
+				options.Configuration = configuration.GetConnectionString("AzureRedisUrl");
+				options.InstanceName = "master";
+			});
 			return services;
 		}
 
